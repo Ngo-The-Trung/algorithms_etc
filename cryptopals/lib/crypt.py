@@ -1,14 +1,19 @@
-#!/usr/bin/env python
 import string
 
 base64_chars = string.ascii_uppercase + string.ascii_lowercase + string.digits + "+/"
+
 
 def h2b(h):
     b = bin(h)[2:]
     return "0" * (8 - len(b)) + b
 
+
 def s2h(s):
     return [int("0x" + s[i * 2:i * 2 + 2], 16) for i in range(len(s) / 2)]
+
+
+def h2s(h):
+    return "".join([hex(v)[2:] for v in h])
 
 
 def h264(h):
@@ -29,9 +34,8 @@ def h264(h):
     return result
 
 
-def main():
-    s = "49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d"
-    assert h264(s2h(s)) == "SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t"
+def xor(h1, h2):
+    l = len(h1)
+    assert l == len(h2)
 
-if __name__ == "__main__":
-    main()
+    return [h1[i] ^ h2[i] for i in range(l)]
