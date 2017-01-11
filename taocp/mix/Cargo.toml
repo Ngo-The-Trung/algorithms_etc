@@ -1,0 +1,6 @@
+[package]
+name = "mix"
+version = "0.1.0"
+authors = ["Ngo The Trung <ngo.the.trung.aczne@gmail.com>"]
+
+[dependencies]
