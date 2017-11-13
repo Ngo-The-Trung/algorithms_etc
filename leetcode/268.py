@@ -1,4 +1,6 @@
-# Missing Number
+# https://leetcode.com/problems/missing-number/description/
+# 268. Missing Number
+# status=done
 
 class Solution(object):
     def missingNumber(self, nums):
@@ -6,19 +8,12 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        m = 0
         s = 0
-        zeroed = False
-        for i in nums:
-            if i == 0:
-                zeroed = True
-            if i > m:
-                m = i
-            s += i
-        t = (m + 1) * m / 2
-        if s == t:
-            if zeroed:
-                return m + 1
-            else:
-                return 0
-        return t - s
+        m = len(nums)
+        _max = 0
+        for n in nums:
+            s += n
+            _max = max(_max, n)
+        if _max < m:
+            return m
+        return (m * (m + 1) / 2) - s
